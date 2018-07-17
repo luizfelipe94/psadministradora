@@ -46,119 +46,19 @@ $container['db'] = function ($c) {
 
 //---------------ROTAS----------------------
 
-$app->get('/', function (Request $request, Response $response) {
+require __DIR__ . '../routes/principal.php';
 
-    echo "rota principal";
+require __DIR__ . '../routes/login.php';
 
-});
+require __DIR__ . '../routes/dashboard.php';
 
-$app->get('/login', function (Request $request, Response $response) {
+require __DIR__ . '../routes/veiculos.php';
 
-    $response = $this->viewtwig->render($response, "login.html",[]);
+require __DIR__ . '../routes/motoristas.php';
 
-    return $response;
+require __DIR__ . '../routes/usuarios.php';
 
-});
-
-$app->post('/login', function (Request $req, Response $res) {
-
-    $res = $res->withRedirect("/dashboard");
-    return $res;
-
-});
-
-$app->get('/dashboard', function (Request $request, Response $response) {
-
-    $response = $this->viewtwig->render($response, "dashboard.html",[]);
-
-    return $response;
-
-});
-
-$app->get('/veiculos', function (Request $request, Response $response) {
-    $this->logger->addInfo("Lista de Veiculos");
-    $mapper = new VeiculoMapper($this->db);
-    $veiculos = $mapper->getVeiculos();
-
-    $response = $this->viewtwig->render($response, "veiculos.html", [
-        'veiculos' => $veiculos,
-        'teste' => 'teste'
-    ]);
-    return $response;
-});
-
-$app->get('/veiculo/novo', function(Request $req, Response $res) {
-    $res = $this->viewtwig->render($res, "veiculoadd.html");
-    return $res;
-});
-
-$app->post('/veiculo/novo', function (Request $req, Response $res) {
-    $data = $req->getParsedBody();
-    $veiculoData = [];
-    $veiculoData['modelo'] = filter_var($data['modelo'], FILTER_SANITIZE_STRING);
-    $veiculoData['ano'] = filter_var($data['ano'], FILTER_SANITIZE_STRING);
-    $veiculoData['cor'] = filter_var($data['cor'], FILTER_SANITIZE_STRING);
-    $veiculoData['placa'] = filter_var($data['placa'], FILTER_SANITIZE_STRING);
-    $veiculoData['km'] = filter_var($data['km'], FILTER_SANITIZE_STRING);
-    $veiculoData['dataVistoria'] = filter_var($data['dataVistoria'], FILTER_SANITIZE_STRING);
-
-    $veiculo = new VeiculoEntity($veiculoData);
-    $veiculoMapper = new VeiculoMapper($this->db);
-    $veiculoMapper->save($veiculo);
-
-    $res = $res->withRedirect("/veiculos");
-    return $res;
-});
-
-$app->get('/veiculo/{id}', function (Request $req, Response $res, $args) {
-    $veiculoId = (int)$args['id'];
-    $mapper = new VeiculoMapper($this->db);
-    $veiculo = $mapper->getVeiculoById($veiculoId);
-
-    $res = $this->viewtwig->render($res, "veiculo-detalhes.html", ["veiculo" => $veiculo]);
-    return $res;
-});
-
-//CRIAR ROTA PARA EDITAR VEICULO
-$app->post('/veiculo/{id}', function (Request $req, Response $res, $args){
-    $data = $req->getParsedBody();
-    $veiculoData = [];
-    $veiculoData['modelo'] = filter_var($data['modelo'], FILTER_SANITIZE_STRING);
-    $veiculoData['ano'] = filter_var($data['ano'], FILTER_SANITIZE_STRING);
-    $veiculoData['cor'] = filter_var($data['cor'], FILTER_SANITIZE_STRING);
-    $veiculoData['placa'] = filter_var($data['placa'], FILTER_SANITIZE_STRING);
-    $veiculoData['km'] = filter_var($data['km'], FILTER_SANITIZE_STRING);
-    $veiculoData['dataVistoria'] = filter_var($data['dataVistoria'], FILTER_SANITIZE_STRING);
-
-    $veiculo = new VeiculoEntity($veiculoData);
-    $veiculoMapper = new VeiculoMapper($this->db);
-    $veiculoMapper->update($veiculo, (int)$args['id']);
-
-    $res = $res->withRedirect("/veiculos");
-    return $res;
-});
-
-//CRIAR ROTA PARA DELETAR VEICULO
-
-$app->get('/motoristas', function(Request $req, Response $res) {
-
-    $res = $this->viewtwig->render($res, "motoristas.html", [
-        'var' => 'tela de motoristas'
-    ]);
-
-    return $res;
-
-});
-
-$app->get('/usuarios', function(Request $req, Response $res) {
-
-    $res = $this->viewtwig->render($res, "usuarios.html", [
-        'var' => 'tela de usuarios'
-    ]);
-
-    return $res;
-
-});
+require __DIR__ . '../routes/proprietarios.php';
 
 /*
 $app->get('/ticket/{id}', function (Request $request, Response $response, $args) {
@@ -170,4 +70,6 @@ $app->get('/ticket/{id}', function (Request $request, Response $response, $args)
     return $response;
 })->setName('ticket-detail');
 */
+
+
 $app->run();
