@@ -15,15 +15,13 @@ $config['db']['dbname'] = "uberdatamanager3";
 $app = new \Slim\App(["settings" => $config]);
 $container = $app->getContainer();
 
-//-------------------------------------------------------------------------------------
-
+//--------------CONTAINERS-------------------
 $container['logger'] = function($c) {
     $logger = new \Monolog\Logger('my_logger');
     $file_handler = new \Monolog\Handler\StreamHandler("../logs/app.log");
     $logger->pushHandler($file_handler);
     return $logger;
 };
-//--------------------------TWIG-------------------------------------------------------
 $container['viewtwig'] = function ($container) {
     $view = new \Slim\Views\Twig('./templates');
 
@@ -33,7 +31,6 @@ $container['viewtwig'] = function ($container) {
 
     return $view;
 };
-//--------------------------------------------------------------------------------------
 
 $container['db'] = function ($c) {
     $db = $c['settings']['db'];
