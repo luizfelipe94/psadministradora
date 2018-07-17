@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+{% block content %}
+
+
+<div class="col-sm-2">
+    <a class="btn btn-block btn-success" href="/veiculo/novo">Adicionar Veiculo</a>
+</div></br></br>
+
+    <div class="col-sm-12">
+            <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Veículos</h3>
+            </div>
+            <table class="table table-bordered table-striped dataTable">
+                <tr>
+                    <th>ID</th>
+                    <th>MODELO</th>
+                    <th>ANO</th>
+                    <th>COR</th>
+                    <th>PLACA</th>
+                    <th>KM</th>
+                    <th>DATA VISTORIA</th>
+                    <th>AÇÕES</th>
+                </tr>
+
+                {% for veiculo in veiculos %}
+                    <tr>
+                        <td>{{ veiculo.idVeiculo }}</td>
+                        <td>{{ veiculo.modelo }}</td>
+                        <td>{{ veiculo.ano }}</td>
+                        <td>{{ veiculo.cor }}</td>
+                        <td>{{ veiculo.placa }}</td>
+                        <td>{{ veiculo.km }}</td>
+                        <td>{{ veiculo.dataVistoria }}</td>
+                        <td>
+                            <a href="/veiculo/{{ veiculo.idVeiculo }}"><span class="glyphicon glyphicon-pencil"></span> </a>
+                            <a href="/veiculo/{{ veiculo.idVeiculo }}/deletar"><span class="glyphicon glyphicon-remove-sign"></span> </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+{% endblock %}

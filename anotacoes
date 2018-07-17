@@ -1,0 +1,11 @@
+servidor php
+php -S localhost:8080
+
+
+ONDE PAREI:
+fazer update e delete de veiculos
+
+
+ERROS:
+1 - cadastrando veiculo sem campos preenchidos.
+1 - sem aviso para placa já cadastrada.
