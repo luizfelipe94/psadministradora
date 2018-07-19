@@ -34,12 +34,12 @@ class VeiculoMapper extends Mapper{
 		$stmt = $this->db->prepare($sql);
 		
 		$result = $stmt->execute([
-			"modelo" => $veiculo->getModelo(),
-			"ano" => $veiculo->getAno(),
-			"cor" => $veiculo->getCor(),
-			"placa" => $veiculo->getPlaca(),
-			"km" => $veiculo->getKm(),
-			"dataVistoria" => $veiculo->getDataVistoria(),
+			":modelo" => $veiculo->getModelo(),
+			":ano" => $veiculo->getAno(),
+			":cor" => $veiculo->getCor(),
+			":placa" => $veiculo->getPlaca(),
+			":km" => $veiculo->getKm(),
+			":dataVistoria" => $veiculo->getDataVistoria(),
 		]);
 
 		if(!$result){
@@ -57,18 +57,26 @@ class VeiculoMapper extends Mapper{
 		$stmt = $this->db->prepare($sql);
 
 		$result = $stmt->execute([
-			"modelo" => $veiculo->getModelo(),
-			"ano" => $veiculo->getAno(),
-			"cor" => $veiculo->getCor(),
-			"placa" => $veiculo->getPlaca(),
-			"km" => $veiculo->getKm(),
-			"dataVistoria" => $veiculo->getDataVistoria(),
-			"idVeiculo" => $idVeiculo
+			":modelo" => $veiculo->getModelo(),
+			":ano" => $veiculo->getAno(),
+			":cor" => $veiculo->getCor(),
+			":placa" => $veiculo->getPlaca(),
+			":km" => $veiculo->getKm(),
+			":dataVistoria" => $veiculo->getDataVistoria(),
+			":idVeiculo" => $idVeiculo
 		]);
 
 		if(!$result){
 			throw new Exception("Não foi possível atualizar o veículo.");
 		}
+	}
+
+	public function delete($id){
+		
+		$sql = "DELETE FROM veiculos WHERE idVeiculo = :id";
+		$stmt = $this->db->prepare($sql);
+		$stmt->bindParam(":id", $id);
+		$stmt->execute();
 	}
 
 }

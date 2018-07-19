@@ -50,7 +50,7 @@ $app->get('/veiculo/{id}', function (Request $req, Response $res, $args) {
 //CRIAR ROTA PARA EDITAR VEICULO
 
 //FIX: testar
-$app->put('/veiculo/{id}', function (Request $req, Response $res, $args){
+$app->post('/veiculo/{id}', function (Request $req, Response $res, $args){
     $data = $req->getParsedBody();
     $veiculoData = [];
     $veiculoData['modelo'] = filter_var($data['modelo'], FILTER_SANITIZE_STRING);
@@ -64,6 +64,13 @@ $app->put('/veiculo/{id}', function (Request $req, Response $res, $args){
     $veiculoMapper = new VeiculoMapper($this->db);
     $veiculoMapper->update($veiculo, (int)$args['id']);
 
+    $res = $res->withRedirect("/veiculos");
+    return $res;
+});
+
+$app->get('/veiculo/{id}/deletar', function (Request $req, Response $res, $args) {
+    $mapper = new VeiculoMapper($this->db);
+    $mapper->delete((int)$args['id']);
     $res = $res->withRedirect("/veiculos");
     return $res;
 });

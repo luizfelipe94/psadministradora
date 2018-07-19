@@ -34,7 +34,7 @@
                         <td>{{ veiculo.dataVistoria }}</td>
                         <td>
                             <a href="/veiculo/{{ veiculo.idVeiculo }}"><span class="glyphicon glyphicon-pencil"></span> </a>
-                            <a href="/veiculo/{{ veiculo.idVeiculo }}/deletar"><span class="glyphicon glyphicon-remove-sign"></span> </a>
+                            <a href="/veiculo/{{ veiculo.idVeiculo }}/deletar" onclick="return confirm('Deseja realmente excluir este registro?')"><span class="glyphicon glyphicon-remove-sign"></span> </a>
                         </td>
                     </tr>
                 {% endfor %}
