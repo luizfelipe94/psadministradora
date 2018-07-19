@@ -47,9 +47,6 @@ $app->get('/veiculo/{id}', function (Request $req, Response $res, $args) {
     return $res;
 });
 
-//CRIAR ROTA PARA EDITAR VEICULO
-
-//FIX: testar
 $app->post('/veiculo/{id}', function (Request $req, Response $res, $args){
     $data = $req->getParsedBody();
     $veiculoData = [];

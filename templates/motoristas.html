@@ -14,27 +14,27 @@
             <table class="table table-bordered table-striped dataTable">
                 <tr>
                     <th>ID</th>
-                    <th>MODELO</th>
-                    <th>ANO</th>
-                    <th>COR</th>
-                    <th>PLACA</th>
-                    <th>KM</th>
-                    <th>DATA VISTORIA</th>
+                    <th>NOME</th>
+                    <th>CNH</th>
+                    <th>ENDERECO</th>
+                    <th>UF</th>
+                    <th>TELEFONE</th>
+                    <th>CELULAR</th>
                     <th>AÇÕES</th>
                 </tr>
 
-                {% for veiculo in veiculos %}
+                {% for motorista in motoristas %}
                     <tr>
-                        <td>{{ veiculo.idVeiculo }}</td>
-                        <td>{{ veiculo.modelo }}</td>
-                        <td>{{ veiculo.ano }}</td>
-                        <td>{{ veiculo.cor }}</td>
-                        <td>{{ veiculo.placa }}</td>
-                        <td>{{ veiculo.km }}</td>
-                        <td>{{ veiculo.dataVistoria }}</td>
+                        <td>{{ motorista.idMotorista }}</td>
+                        <td>{{ motorista.nome }}</td>
+                        <td>{{ motorista.cnh }}</td>
+                        <td>{{ motorista.endereco }}</td>
+                        <td>{{ motorista.uf }}</td>
+                        <td>{{ motorista.telefone }}</td>
+                        <td>{{ motorista.celular }}</td>
                         <td>
-                            <a href="/veiculo/{{ veiculo.idVeiculo }}"><span class="glyphicon glyphicon-pencil"></span> </a>
-                            <a href="/veiculo/{{ veiculo.idVeiculo }}/deletar"><span class="glyphicon glyphicon-remove-sign"></span> </a>
+                            <a href="/veiculo/{{ motorista.idMotorista }}"><span class="glyphicon glyphicon-pencil"></span> </a>
+                            <a href="/veiculo/{{ motorista.idMotorista }}/deletar"><span class="glyphicon glyphicon-remove-sign"></span> </a>
                         </td>
                     </tr>
                 {% endfor %}

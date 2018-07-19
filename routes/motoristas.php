@@ -5,8 +5,11 @@ use Slim\Http\Response;
 
 $app->get('/motoristas', function(Request $req, Response $res) {
 
+    $mapper = new MotoristaMapper($this->db);
+    $motoristas = $mapper->getMotoristas();
+
     $res = $this->viewtwig->render($res, "motoristas.html", [
-        'var' => 'tela de motoristas'
+        'motoristas' => $motoristas
     ]);
 
     return $res;
