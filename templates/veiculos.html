@@ -19,7 +19,6 @@
                     <th>COR</th>
                     <th>PLACA</th>
                     <th>KM</th>
-                    <th>DATA VISTORIA</th>
                     <th>AÇÕES</th>
                 </tr>
 
@@ -31,7 +30,6 @@
                         <td>{{ veiculo.cor }}</td>
                         <td>{{ veiculo.placa }}</td>
                         <td>{{ veiculo.km }}</td>
-                        <td>{{ veiculo.dataVistoria }}</td>
                         <td>
                             <a href="/veiculo/{{ veiculo.idVeiculo }}"><span class="glyphicon glyphicon-pencil"></span> </a>
                             <a href="/veiculo/{{ veiculo.idVeiculo }}/deletar" onclick="return confirm('Deseja realmente excluir este registro?')"><span class="glyphicon glyphicon-remove-sign"></span> </a>

@@ -4,7 +4,7 @@ class VeiculoMapper extends Mapper{
 
 	public function getVeiculos(){
 
-		$sql = "SELECT * FROM veiculos";
+		$sql = "SELECT * FROM veiculo";
 		$stmt = $this->db->query($sql);
 		$results = [];
 
@@ -17,7 +17,7 @@ class VeiculoMapper extends Mapper{
 
 	public function getVeiculoById($idVeiculo){
 
-		$sql = "SELECT * FROM veiculos WHERE idVeiculo = :idVeiculo";
+		$sql = "SELECT * FROM veiculo WHERE idVeiculo = :idVeiculo";
 		$stmt = $this->db->prepare($sql);
 		$result = $stmt->execute(["idVeiculo" => $idVeiculo]);
 
@@ -29,7 +29,7 @@ class VeiculoMapper extends Mapper{
 
 	public function save(VeiculoEntity $veiculo){
 
-		$sql = "INSERT INTO veiculos (modelo, ano, cor, placa, km, dataVistoria) VALUES (:modelo, :ano, :cor, :placa, :km, :dataVistoria)";
+		$sql = "INSERT INTO veiculo (modelo, ano, cor, placa, km) VALUES (:modelo, :ano, :cor, :placa, :km)";
 
 		$stmt = $this->db->prepare($sql);
 		
@@ -38,8 +38,7 @@ class VeiculoMapper extends Mapper{
 			":ano" => $veiculo->getAno(),
 			":cor" => $veiculo->getCor(),
 			":placa" => $veiculo->getPlaca(),
-			":km" => $veiculo->getKm(),
-			":dataVistoria" => $veiculo->getDataVistoria(),
+			":km" => $veiculo->getKm()
 		]);
 
 		if(!$result){
@@ -50,8 +49,8 @@ class VeiculoMapper extends Mapper{
 	}
 	
 	public function update(VeiculoEntity $veiculo, $idVeiculo){
-		$sql = "UPDATE veiculos 
-		SET modelo=:modelo, ano=:ano, cor=:cor, placa=:placa, km=:km, dataVistoria=:dataVistoria
+		$sql = "UPDATE veiculo
+		SET modelo=:modelo, ano=:ano, cor=:cor, placa=:placa, km=:km
 		WHERE idVeiculo=:idVeiculo";
 
 		$stmt = $this->db->prepare($sql);
@@ -62,7 +61,6 @@ class VeiculoMapper extends Mapper{
 			":cor" => $veiculo->getCor(),
 			":placa" => $veiculo->getPlaca(),
 			":km" => $veiculo->getKm(),
-			":dataVistoria" => $veiculo->getDataVistoria(),
 			":idVeiculo" => $idVeiculo
 		]);
 
@@ -73,7 +71,7 @@ class VeiculoMapper extends Mapper{
 
 	public function delete($id){
 		
-		$sql = "DELETE FROM veiculos WHERE idVeiculo = :id";
+		$sql = "DELETE FROM veiculo WHERE idVeiculo = :id";
 		$stmt = $this->db->prepare($sql);
 		$stmt->bindParam(":id", $id);
 		$stmt->execute();

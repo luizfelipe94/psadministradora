@@ -13,7 +13,21 @@ $app->get('/login', function (Request $request, Response $response) {
 
 $app->post('/login', function (Request $req, Response $res) {
 
+    $mapper = new UsuarioMapper($this->db);
+    $data = [];
+    $data = $req->getParsedBody();
+    $mapper->login($data['username'], $data['userpass']);
+
     $res = $res->withRedirect("/dashboard");
     return $res;
+
+});
+
+$app->get('/logout', function (Request $request, Response $response) {
+
+    $mapper = new UsuarioMapper($this->db);
+    $mapper->logout();
+    $response = $response->withRedirect("/login");
+    return $response;
 
 });

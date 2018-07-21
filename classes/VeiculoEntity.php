@@ -8,7 +8,6 @@ class VeiculoEntity
     protected $cor;
     protected $placa;
     protected $km;
-    protected $dataVistoria;
 
     /**
      * Accept an array of data matching properties of this class
@@ -27,7 +26,6 @@ class VeiculoEntity
         $this->cor = $data['cor'];
         $this->placa = strtoupper($data['placa']);
         $this->km = $data['km'];
-        $this->dataVistoria = $data['dataVistoria'];
     }
 
     public function getIdVeiculo() {
@@ -54,7 +52,4 @@ class VeiculoEntity
         return $this->km;
     }
 
-    public function getDataVistoria(){
-        return $this->dataVistoria;
-    }
 }

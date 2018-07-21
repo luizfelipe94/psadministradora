@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="col-md-6">
+        <h1>Novo Veiculo</h1>
+    <div class="box box-primary">
+
+        <form role="form" method="post" action="/usuario/novo">
+
+            <div class="box-body">
+
+                <div class="form-group">
+                    <label for="modelo">USERNAME</label>
+                    <input class="form-control" name="username" id="username" type="text" />
+                </div>
+
+                <div class="form-group">
+                    <label for="ano">PASSWORD</label>
+                    <input class="form-control" name="userpass" id="userpass" type="password" />
+                </div>
+
+                <div class="form-group">
+                    <label for="cor">TIPO</label>
+                    <select class="form-control select2 select2-hidden-accessible" name="tipo" >
+                        <option value="admin">ADMIN</option>
+                        <option value="cliente">CLIENTE</option>
+                        <option value="motorista">MOTORISTA</option>
+                      </select>
+                </div>
+            </div>
+            
+
+            <div class="box-footer">
+                <button type="submit" class="btn btn-success">Cadastrar</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

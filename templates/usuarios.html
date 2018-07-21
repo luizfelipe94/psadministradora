@@ -1,5 +1,35 @@
 {% extends "layout.html" %}
-
 {% block content %}
-    {{var}}
+
+
+<div class="col-sm-2">
+    <a class="btn btn-block btn-success" href="/usuario/novo">Adicionar Usuário</a>
+</div></br></br>
+
+    <div class="col-sm-12">
+            <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Usuários</h3>
+            </div>
+            <table class="table table-bordered table-striped dataTable">
+                <tr>
+                    <th>ID</th>
+                    <th>USUÁRIO</th>
+                    <th>TIPO</th>
+                </tr>
+
+                {% for usuario in usuarios %}
+                    <tr>
+                        <td>{{ usuario.idUsuario }}</td>
+                        <td>{{ usuario.username }}</td>
+                        <td>{{ usuario.tipo }}</td>
+                        <td>
+                            <a href="/usuario/{{ usuario.idUsuario }}"><span class="glyphicon glyphicon-pencil"></span> </a>
+                            <a href="/usuario/{{ usuario.idUsuario }}/deletar" onclick="return confirm('Deseja realmente excluir este registro?')"><span class="glyphicon glyphicon-remove-sign"></span> </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
 {% endblock %}
