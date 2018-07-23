@@ -7,16 +7,22 @@ $app->get('/veiculos', function (Request $request, Response $response) {
     $this->logger->addInfo("Lista de Veiculos");
     $mapper = new VeiculoMapper($this->db);
     $veiculos = $mapper->getVeiculos();
+    $usuario = $_SESSION[UsuarioMapper::SESSION];
 
     $response = $this->viewtwig->render($response, "veiculos.html", [
         'veiculos' => $veiculos,
-        'teste' => 'teste'
+        'username' => $usuario['username'],
+        'idUsuario' => $usuario['idUsuario']
     ]);
     return $response;
 });
 
 $app->get('/veiculo/novo', function(Request $req, Response $res) {
-    $res = $this->viewtwig->render($res, "veiculoadd.html");
+    $usuario = $_SESSION[UsuarioMapper::SESSION];
+    $res = $this->viewtwig->render($res, "veiculoadd.html",[
+        'username' => $usuario['username'],
+        'idUsuario' => $usuario['idUsuario']
+    ]);
     return $res;
 });
 
@@ -39,11 +45,17 @@ $app->post('/veiculo/novo', function (Request $req, Response $res) {
 });
 
 $app->get('/veiculo/{id}', function (Request $req, Response $res, $args) {
+    $usuario = $_SESSION[UsuarioMapper::SESSION];
     $veiculoId = (int)$args['id'];
     $mapper = new VeiculoMapper($this->db);
     $veiculo = $mapper->getVeiculoById($veiculoId);
 
-    $res = $this->viewtwig->render($res, "veiculo-detalhes.html", ["veiculo" => $veiculo]);
+    $res = $this->viewtwig->render($res, "veiculo-detalhes.html", [
+        "veiculo" => $veiculo,
+        'username' => $usuario['username'],
+        'idUsuario' => $usuario['idUsuario']
+        
+    ]);
     return $res;
 });
 

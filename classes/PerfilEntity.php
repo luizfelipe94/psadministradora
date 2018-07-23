@@ -8,6 +8,10 @@ class PerfilEntity {
     protected $rg;
     protected $cnh;
     protected $email;
+    protected $profissao;
+    protected $educacao;
+    protected $sobreMim;
+
 
     public function __construct(array $data) {
         // no id if we're creating
@@ -20,6 +24,10 @@ class PerfilEntity {
         $this->rg = $data['rg'];
         $this->cnh = strtoupper($data['cnh']);
         $this->email = $data['email'];
+        $this->profissao = $data['profissao'];
+        $this->educacao = $data['educacao'];
+        $this->sobreMim = $data['sobreMim'];
+        
     }
 
     public function getIdPerfil(){
@@ -44,5 +52,17 @@ class PerfilEntity {
 
     public function getEmail(){
         return $this->email;
+    }
+
+    public function getProfisao(){
+        return $this->profissao;
+    }
+
+    public function getEducacao(){
+        return $this->educacao;
+    }
+
+    public function getSobreMim(){
+        return $this->sobreMim;
     }
 }

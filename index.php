@@ -44,19 +44,21 @@ $container['db'] = function ($c) {
 
 //---------------ROTAS----------------------
 
-require __DIR__ . '../routes/principal.php';
+require __DIR__ . '../routes/principalRoute.php';
 
-require __DIR__ . '../routes/login.php';
+require __DIR__ . '../routes/loginRoute.php';
 
-require __DIR__ . '../routes/dashboard.php';
+require __DIR__ . '../routes/dashboardRoute.php';
 
-require __DIR__ . '../routes/veiculos.php';
+require __DIR__ . '../routes/veiculosRoute.php';
 
-require __DIR__ . '../routes/motoristas.php';
+require __DIR__ . '../routes/motoristasRoute.php';
 
-require __DIR__ . '../routes/usuarios.php';
+require __DIR__ . '../routes/usuariosRoute.php';
 
-require __DIR__ . '../routes/proprietarios.php';
+require __DIR__ . '../routes/proprietariosRoute.php';
+
+
 
 /*
 $app->get('/ticket/{id}', function (Request $request, Response $response, $args) {

@@ -1,22 +1,29 @@
-<?php
+<?php  
 
 use Slim\Http\Request;
 use Slim\Http\Response;
+
 
 $app->get('/usuarios', function(Request $req, Response $res) {
 
     $mapper = new UsuarioMapper($this->db);
     $usuarios = $mapper->getUsuarios();
-
+    $usuario = $_SESSION[UsuarioMapper::SESSION];
     $res = $this->viewtwig->render($res, "usuarios.html", [
-        'usuarios' => $usuarios
+        'usuarios' => $usuarios,
+        'username' => $usuario['username'],
+        'idUsuario' => $usuario['idUsuario']
     ]);
     return $res;
 
 });
 
 $app->get('/usuario/novo', function(Request $req, Response $res) {
-    $res = $this->viewtwig->render($res, "usuarioadd.html");
+    $usuario = $_SESSION[UsuarioMapper::SESSION];
+    $res = $this->viewtwig->render($res, "usuarioadd.html",[
+        'username' => $usuario['username'],
+        'idUsuario' => $usuario['idUsuario']
+    ]);
     return $res;
 });
 
@@ -37,11 +44,16 @@ $app->post('/usuario/novo', function(Request $req, Response $res) {
 });
 
 $app->get('/usuario/{id}', function (Request $req, Response $res, $args) {
+    $usuarioS = $_SESSION[UsuarioMapper::SESSION];
     $idUsuario = (int)$args['id'];
     $mapper = new UsuarioMapper($this->db);
     $usuario = $mapper->getUsuariobyId($idUsuario);
 
-    $res = $this->viewtwig->render($res, "usuario-detalhes.html", ["usuario" => $usuario]);
+    $res = $this->viewtwig->render($res, "usuario-detalhes.html", [
+        "usuario" => $usuario,
+        'username' => $usuarioS['username'],
+        'idUsuario' => $usuarioS['idUsuario']
+    ]);
     return $res;
 });
 
@@ -65,4 +77,9 @@ $app->get('/usuario/{id}/deletar', function (Request $req, Response $res, $args)
     $mapper->delete((int)$args['id']);
     $res = $res->withRedirect("/usuarios");
     return $res;
+});
+
+$app->get('/perfil/{id}', function(Request $req, Response $res, $args) {
+    
+    
 });

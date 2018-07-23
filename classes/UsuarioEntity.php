@@ -17,6 +17,7 @@ class UsuarioEntity{
         $this->username = $data['username'];
         $this->userpass = $data['userpass'];
         $this->tipo = $data['tipo'];
+        $this->id_Perfil = $data['id_Perfil'];
     }
 
     public function getIdUsuario(){

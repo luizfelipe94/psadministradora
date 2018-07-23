@@ -108,6 +108,7 @@ class UsuarioMapper extends Mapper{
 
 			$_SESSION[UsuarioMapper::SESSION]['idUsuario'] = $usuario->getIdUsuario(); 
 			$_SESSION[UsuarioMapper::SESSION]['username'] = $usuario->getUsername();
+			$_SESSION[UsuarioMapper::SESSION]['id_Perfil'] = $usuario->getId_Perfil();
 
         }else{
 			throw new \Exception("Usuário inexistente ou senha inválida.");
@@ -116,7 +117,17 @@ class UsuarioMapper extends Mapper{
 	}
 	
 	public function logout(){
+
 		$_SESSION[UsuarioMapper::SESSION] = null;
 		unset($_SESSION[UsuarioMapper::SESSION]);
+
+	}
+
+	public function getIdUsuario($id){
+
+		$sql = "SELECT * FROM usuario WHERE idUsuario = :id";
+		$stmt = $this->db->prepare($sql);
+		$stmt->bindParam(":id", $id);
+		$data = $stmt->execute();
 	}
 }
