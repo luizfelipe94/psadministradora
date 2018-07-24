@@ -18,8 +18,8 @@ $container = $app->getContainer();
 
 //--------------CONTAINERS-------------------
 $container['logger'] = function($c) {
-    $logger = new \Monolog\Logger('my_logger');
-    $file_handler = new \Monolog\Handler\StreamHandler("../logs/app.log");
+    $logger = new \Monolog\Logger('PSADMINISTRADORA');
+    $file_handler = new \Monolog\Handler\StreamHandler('./logs/app.log');
     $logger->pushHandler($file_handler);
     return $logger;
 };

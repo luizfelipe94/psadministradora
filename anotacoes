@@ -1,6 +1,8 @@
 servidor php
 php -S localhost:8080
 
+cd Documents\Projetos\PSADMINISTRADORA\
+
 
 ONDE PAREI:
 fazer update e delete de veiculos
