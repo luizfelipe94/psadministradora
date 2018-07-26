@@ -5,9 +5,12 @@ cd Documents\Projetos\PSADMINISTRADORA\
 
 
 ONDE PAREI:
-fazer update e delete de veiculos
-
+validacao de login
 
 ERROS:
 1 - cadastrando veiculo sem campos preenchidos.
 1 - sem aviso para placa já cadastrada.
+
+PROXIMOS PASSOS
+- validar campos de insert
+- modelar tela de manutencao de veiculos
