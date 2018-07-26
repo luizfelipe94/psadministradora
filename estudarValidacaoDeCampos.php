@@ -1,7 +1,10 @@
+<?php
+/*
 Twig extension
 This package comes with a Twig extension to display error messages and submitted values in your Twig templates. You can skip this step if you don't want to use it.
 
 To use the extension, you must install twig first
+*/
 
 $ composer require slim/twig-view
 Configuration
@@ -56,7 +59,11 @@ public function register(Request $request, Response $response)
     
     return $this->view->render($response, 'register.twig');
 }
+
+?>
+
 register.twig
+
 <form action="url" method="POST">
     <input type="text" name="username" value="{{ val('username') }}">
     {% if has_error('username') %}<span>{{ error('username') }}</span>{% endif %}
