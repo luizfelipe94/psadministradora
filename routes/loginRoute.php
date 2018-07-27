@@ -2,6 +2,7 @@
 
 use Slim\Http\Request;
 use Slim\Http\Response;
+use \classes\Mapper;
 
 $app->get('/login', function (Request $request, Response $response) {
 

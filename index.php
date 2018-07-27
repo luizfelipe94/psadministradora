@@ -3,6 +3,7 @@ session_start();
 
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
+//use \Tuupola\Middleware\HttpBasicAuthentication\PdoAuthenticator;
 
 require __DIR__ . '/vendor/autoload.php';
 
@@ -15,6 +16,7 @@ $config['db']['dbname'] = "uberdatamanager";
 
 $app = new \Slim\App(["settings" => $config]);
 $container = $app->getContainer();
+
 
 //--------------CONTAINERS-------------------
 $container['logger'] = function($c) {
@@ -42,7 +44,26 @@ $container['db'] = function ($c) {
     $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
     return $pdo;
 };
-
+/*
+$app->add(new \Tuupola\Middleware\HttpBasicAuthentication([
+    "path" => "/",
+    "realm" => "Protected",
+    "ignore" => ["/login"],
+    "authenticator" => new PdoAuthenticator([
+        "pdo" => $container['db'],
+        "table" => "usuario",
+        "user" => "username",
+        "hash" => "userpass"
+    ]),
+    "error" => function ($response, $arguments) {
+        $data = [];
+        $data["status"] = "error";
+        $data["message"] = $arguments["message"];
+        return $response->write(json_encode($data, JSON_UNESCAPED_SLASHES));
+    }
+]));
+*/
+    
 //---------------ROTAS----------------------
 
 require __DIR__ . '../routes/principalRoute.php';

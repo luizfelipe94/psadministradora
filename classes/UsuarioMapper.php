@@ -92,22 +92,24 @@ class UsuarioMapper extends Mapper{
 		$sql = "SELECT * FROM usuario WHERE username = :username";
 
         $stmt = $this->db->prepare($sql);
+		$stmt->execute([":username" => $username]);
 
-		$results = $stmt->execute([":username" => $username]);
+		$results = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
-		if (empty($results))
+		if (count($results) === 0)
 		{
 			throw new \Exception("Usuário inexistente ou senha inválida. (nao retornou resultado)");
         }
         
         $data = $results[0];
 
-        if(1 + 1 == 2){
+        if(password_verify($userpass, $data["userpass"]) === true){
 
-            $usuario = new UsuarioEntity($stmt->fetch());
+            $usuario = new UsuarioEntity($data);
 
 			$_SESSION[UsuarioMapper::SESSION]['idUsuario'] = $usuario->getIdUsuario(); 
 			$_SESSION[UsuarioMapper::SESSION]['username'] = $usuario->getUsername();
+			$_SESSION[UsuarioMapper::SESSION]['tipo'] = $usuario->getTipo();
 			$_SESSION[UsuarioMapper::SESSION]['id_Perfil'] = $usuario->getId_Perfil();
 
         }else{
@@ -130,4 +132,49 @@ class UsuarioMapper extends Mapper{
 		$stmt->bindParam(":id", $id);
 		$data = $stmt->execute();
 	}
+
+	public function checkLogin($tipo = "admin"):bool
+	{
+		if (
+			!isset($_SESSION[UsuarioMapper::SESSION])
+			||
+			!$_SESSION[UsuarioMapper::SESSION]
+			||
+			!(int)$_SESSION[UsuarioMapper::SESSION]["idUsuario"] > 0
+		) {
+			//Não está logado
+			return false;
+		} else {
+			if ($tipo === "admin" && (bool)$_SESSION[UsuarioMapper::SESSION]['tipo'] === "admin") {
+				return true;
+			} else if ($tipo !== "admin") {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	}
+
+	public function verifyLogin($request, $response, $tipo = "admin")
+	{
+		if (!UsuarioMapper::checkLogin($tipo)) {
+
+			if ($tipo === "admin") {
+			
+				$response = $response->withRedirect('/dashboard');
+				return $response;
+
+			} else {
+				
+				$response = $response->withRedirect('/login');
+				return $response;
+				
+			}
+			
+			exit;
+		}
+	}
+
+
+
 }

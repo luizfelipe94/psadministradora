@@ -6,7 +6,8 @@
         "robmorgan/phinx": "^0.5.1",
         "slim/twig-view": "^2.4",
         "almasaeed2010/adminlte": "~2.4",
-        "fullcalendar/fullcalendar": "^3.9"
+        "fullcalendar/fullcalendar": "^3.9",
+        "tuupola/slim-basic-auth": "^3.1"
     },
     "autoload": {
         "psr-4": {

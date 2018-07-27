@@ -4,7 +4,7 @@ Twig extension
 This package comes with a Twig extension to display error messages and submitted values in your Twig templates. You can skip this step if you don't want to use it.
 
 To use the extension, you must install twig first
-*/
+
 
 $ composer require slim/twig-view
 Configuration
