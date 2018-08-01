@@ -4,18 +4,7 @@ use Slim\Http\Request;
 use Slim\Http\Response;
 
 $app->get('/veiculos', function (Request $request, Response $response) {
-
-    $login = new UsuarioMapper($this->db);
-    $logado = $login->checkLogin($request, $response);
-
-    if($logado){
-        $response->write('logado');
-        return $response;
-    }else{
-        $response->write('nao logado');
-        return $response;
-    }
-
+    
     $this->logger->addInfo("Lista de Veiculos");
     $mapper = new VeiculoMapper($this->db);
     $veiculos = $mapper->getVeiculos();

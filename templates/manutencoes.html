@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <div class="col-sm-12">
+            <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Manutenções</h3>
+            </div>
+            <table class="table table-bordered table-striped dataTable">
+                <tr>
+                    <th>ID</th>
+                    <th>DATA</th>
+                    <th>NOME</th>
+                    <th>DETALHES</th>
+                    <th>VEÍCULO</th>
+                    <th>AÇÕES</th>
+                </tr>
+
+                {% for manutencao in manutencoes %}
+                    <tr>
+                        <td>{{ manutencao.idManutencao }}</td>
+                        <td>{{ manutencao.dataManutencao }}</td>
+                        <td>{{ manutencao.nome }}</td>
+                        <td>{{ manutencao.detalhes }}</td>
+                        <td><a href="/veiculo/{{ manutencao.idVeiculo }}">{{ manutencao.idVeiculo }}</a></td>
+                        <td>
+                            <a href="/manutencao/{{ manutencao.idManutencao }}"><span class="glyphicon glyphicon-pencil"></span> </a>
+                            <a href="/manutencao/{{ manutencao.idManutencao }}/deletar" onclick="return confirm('Deseja realmente excluir este registro?')"><span class="glyphicon glyphicon-remove-sign"></span> </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+{% endblock %}

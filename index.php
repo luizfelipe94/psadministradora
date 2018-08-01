@@ -80,6 +80,8 @@ require __DIR__ . '../routes/usuariosRoute.php';
 
 require __DIR__ . '../routes/proprietariosRoute.php';
 
+require __DIR__ . '../routes/manutencaoRoute.php';
+
 
 
 /*
