@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+{% block content %}
+
+
+<div class="col-sm-2">
+    <a class="btn btn-block btn-success" href="/motorista/novo">Adicionar Motorista</a>
+</div></br></br>
+
+    <div class="col-sm-12">
+            <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Motoristas</h3>
+            </div>
+            <table class="table table-bordered table-striped dataTable">
+                <tr>
+                    <th>ID</th>
+                    <th>NOME</th>
+                    <th>CNH</th>
+                    <th>ENDERECO</th>
+                    <th>UF</th>
+                    <th>TELEFONE</th>
+                    <th>CELULAR</th>
+                    <th>AÇÕES</th>
+                </tr>
+
+                {% for motorista in motoristas %}
+                    <tr>
+                        <td>{{ motorista.idMotorista }}</td>
+                        <td>{{ motorista.nome }}</td>
+                        <td>{{ motorista.cnh }}</td>
+                        <td>{{ motorista.endereco }}</td>
+                        <td>{{ motorista.uf }}</td>
+                        <td>{{ motorista.telefone }}</td>
+                        <td>{{ motorista.celular }}</td>
+                        <td>
+                            <a href="/veiculo/{{ motorista.idMotorista }}"><span class="glyphicon glyphicon-pencil"></span> </a>
+                            <a href="/veiculo/{{ motorista.idMotorista }}/deletar"><span class="glyphicon glyphicon-remove-sign"></span> </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+{% endblock %}
