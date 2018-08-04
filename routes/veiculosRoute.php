@@ -45,13 +45,13 @@ $app->post('/veiculo/novo', function (Request $req, Response $res) {
     return $res;
 });
 
-$app->get('/veiculo/{id}', function (Request $req, Response $res, $args) {
+$app->get('/veiculo/{id}/update', function (Request $req, Response $res, $args) {
     $usuario = $_SESSION[UsuarioMapper::SESSION];
     $veiculoId = (int)$args['id'];
     $mapper = new VeiculoMapper($this->db);
     $veiculo = $mapper->getVeiculoById($veiculoId);
 
-    $res = $this->viewtwig->render($res, "veiculo-detalhes.html", [
+    $res = $this->viewtwig->render($res, "veiculoupdate.html", [
         "veiculo" => $veiculo,
         'username' => $usuario['username'],
         'idUsuario' => $usuario['idUsuario']
@@ -60,7 +60,7 @@ $app->get('/veiculo/{id}', function (Request $req, Response $res, $args) {
     return $res;
 });
 
-$app->post('/veiculo/{id}', function (Request $req, Response $res, $args){
+$app->post('/veiculo/{id}/update', function (Request $req, Response $res, $args){
     $data = $req->getParsedBody();
     $veiculoData = [];
     $veiculoData['modelo'] = filter_var($data['modelo'], FILTER_SANITIZE_STRING);

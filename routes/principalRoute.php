@@ -5,6 +5,11 @@ use Slim\Http\Response;
 
 $app->get('/', function (Request $request, Response $response) {
 
-    echo "rota principal";
+    $response = $this->viewtwig->render($response, "veiculo-detalhes.html", [
+        'usuarios' => $usuarios,
+        'username' => $usuario['username'],
+        'idUsuario' => $usuario['idUsuario']
+    ]);
+    return $response;
 
 });
