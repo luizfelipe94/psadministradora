@@ -1,18 +1,19 @@
-
 {% extends "layout.html" %}
 {% block content %}
+
 <section class="content container-fluid">
     <div class="row">
             <div class="col-md-3">
-
-                <div class="input-group input-group-sm">
-                    
-                    <input type="text" class="form-control" placeholder="Pesquisar Veículo">
-                        <span class="input-group-btn">
-                            <button type="button" class="btn btn-info btn-flat">Pesquisar</button>
-                        </span>
+                <form role="form" method="get" action="/veiculo-detalhes/">
+                    <div class="input-group input-group-sm">
                         
-                </div>
+                        <input type="text" class="form-control" placeholder="Pesquisar Veículo">
+                            <span class="input-group-btn">
+                                <button type="submit" class="btn btn-info btn-flat">Pesquisar</button>
+                            </span>
+                            
+                    </div>
+                </form>
 
             </div>
     </div> </br>
@@ -26,13 +27,13 @@
                     <!-- /.box-header -->
                 <div class="box-body">
                     <div class="col-md-6">
-                        <h4>ID:</h4>
-                        <h4>Modelo:</h4>
-                        <h4>Placa:</h4>
+                        <h4>ID: {{ veiculo.idVeiculo }}</h4>
+                        <h4>Modelo: {{ veiculo.modelo }}</h4>
+                        <h4>Placa: {{ veiculo.placa }}</h4>
                     </div>
                     <div class="com-md-6">
-                        <h4>Cor:</h4>
-                        <h4>Ano:</h4>
+                        <h4>Cor: {{ veiculo.cor }}</h4>
+                        <h4>Ano: {{ veiculo.ano }}</h4>
                     </div>
                 </div>
                     <!-- /.box-body -->
@@ -47,6 +48,7 @@
                     <div class="box-header">
                         <h3 class="box-title">Manutenções detse veículo</h3>
                     </div>
+                    {% if manutencoes  %}
                     <table class="table table-bordered table-striped dataTable">
                         <tr>
                             <th>ID</th>
@@ -69,6 +71,14 @@
                             </tr>
                         {% endfor %}
                     </table>
+                    
+                    {% else %}
+                    <div class="alert alert-warning alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <h4><i class="icon fa fa-warning"></i> Alerta!</h4>
+                                Não existem manutenções cadastradas para este veículo.
+                          </div>
+                    {% endif %}
                 </div>
             </div>
     </div>

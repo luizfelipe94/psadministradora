@@ -45,7 +45,7 @@ $app->post('/veiculo/novo', function (Request $req, Response $res) {
     return $res;
 });
 
-$app->get('/veiculo/{id}/update', function (Request $req, Response $res, $args) {
+$app->get('/veiculo/{id}', function (Request $req, Response $res, $args) {
     $usuario = $_SESSION[UsuarioMapper::SESSION];
     $veiculoId = (int)$args['id'];
     $mapper = new VeiculoMapper($this->db);
@@ -60,7 +60,7 @@ $app->get('/veiculo/{id}/update', function (Request $req, Response $res, $args) 
     return $res;
 });
 
-$app->post('/veiculo/{id}/update', function (Request $req, Response $res, $args){
+$app->post('/veiculo/{id}', function (Request $req, Response $res, $args){
     $data = $req->getParsedBody();
     $veiculoData = [];
     $veiculoData['modelo'] = filter_var($data['modelo'], FILTER_SANITIZE_STRING);
@@ -76,6 +76,25 @@ $app->post('/veiculo/{id}/update', function (Request $req, Response $res, $args)
 
     $res = $res->withRedirect("/veiculos");
     return $res;
+});
+
+$app->get('/veiculo-detalhes/{id}', function (Request $request, Response $response, $args) {
+    $usuario = $_SESSION[UsuarioMapper::SESSION];
+    $veiculoId = (int)$args['id'];
+    $mapper = new VeiculoMapper($this->db);
+    $veiculo = $mapper->getVeiculoById($veiculoId);
+
+    $mapperManutencao = new ManutencaoMapper($this->db);
+    $manutencoes = $mapperManutencao->getManutencoesByIdVeiculo($veiculoId);
+
+    $response = $this->viewtwig->render($response, "veiculo-detalhes.html", [
+        'veiculo' => $veiculo,
+        'manutencoes' => $manutencoes,
+        'username' => $usuario['username'],
+        'idUsuario' => $usuario['idUsuario']
+    ]);
+    return $response;
+
 });
 
 $app->get('/veiculo/{id}/deletar', function (Request $req, Response $res, $args) {

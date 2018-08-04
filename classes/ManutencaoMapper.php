@@ -6,7 +6,7 @@ class ManutencaoMapper extends Mapper{
 
         $sql = "select * from manutencao a
 		inner join veiculo b
-		on a.id_Veiculo = b.idVeiculo";
+		on a.id_Veiculo = b.idVeiculo ORDER BY a.idManutencao";
 		
 		$stmt = $this->db->query($sql);
 		$results = [];
@@ -30,6 +30,31 @@ class ManutencaoMapper extends Mapper{
 		if($result){
 			return new ManutencaoEntity($stmt->fetch());
 		}
+	}
+
+	public function getManutencoesByIdVeiculo($idVeiculo){
+		
+		$sql = "SELECT * FROM manutencao WHERE id_Veiculo = :idVeiculo";
+		$stmt = $this->db->prepare($sql);
+		$stmt->bindParam(':idVeiculo', $idVeiculo);
+		$stmt->execute();
+
+		$results = $stmt->fetchAll();
+
+		return $results;
+
+	}
+
+	public function save(){
+
+	}
+
+	public function delete(){
+
+	}
+
+	public function update(){
+		
 	}
 
 	
