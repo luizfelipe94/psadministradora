@@ -18,4 +18,19 @@ class ManutencaoMapper extends Mapper{
 		return $results;
 
     }
+
+	public function getManutencaoById($idManutencao){
+
+		$sql = "SELECT * FROM manutencao a INNERR JOIN veiculo b ON a.id_Veiculo = b.idVeiculo 
+		WHERE a.idManutencao = :idManutencao";
+
+		$stmt = $this->db->prepare($sql);
+		$result = $stmt->execute(['idManutencao' => $idManutencao]);
+
+		if($result){
+			return new ManutencaoEntity($stmt->fetch());
+		}
+	}
+
+	
 }
