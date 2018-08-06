@@ -16,7 +16,7 @@ $app->get('/usuarios', function(Request $req, Response $res) {
     ]);
     return $res;
 
-});
+})->setName('usuarios');
 
 $app->get('/usuario/novo', function(Request $req, Response $res) {
     $usuario = $_SESSION[UsuarioMapper::SESSION];
@@ -25,7 +25,7 @@ $app->get('/usuario/novo', function(Request $req, Response $res) {
         'idUsuario' => $usuario['idUsuario']
     ]);
     return $res;
-});
+})->setName('usuarios-novo');
 
 $app->post('/usuario/novo', function(Request $req, Response $res) {
 
@@ -41,7 +41,7 @@ $app->post('/usuario/novo', function(Request $req, Response $res) {
 
     $res = $res->withRedirect("/usuarios");
     return $res;
-});
+})->setName('usuarios-novo');
 
 $app->get('/usuario/{id}', function (Request $req, Response $res, $args) {
     $usuarioS = $_SESSION[UsuarioMapper::SESSION];
@@ -55,7 +55,7 @@ $app->get('/usuario/{id}', function (Request $req, Response $res, $args) {
         'idUsuario' => $usuarioS['idUsuario']
     ]);
     return $res;
-});
+})->setName('usuarios-id');
 
 $app->post('/usuario/{id}', function (Request $req, Response $res, $args){
     $data = $req->getParsedBody();
@@ -70,14 +70,14 @@ $app->post('/usuario/{id}', function (Request $req, Response $res, $args){
 
     $res = $res->withRedirect("/usuarios");
     return $res;
-});
+})->setName('usuarios-id');
 
 $app->get('/usuario/{id}/deletar', function (Request $req, Response $res, $args) {
     $mapper = new UsuarioMapper($this->db);
     $mapper->delete((int)$args['id']);
     $res = $res->withRedirect("/usuarios");
     return $res;
-});
+})->setName('usuarios-deletar');
 
 $app->get('/perfil/{id}', function(Request $req, Response $res, $args) {
     

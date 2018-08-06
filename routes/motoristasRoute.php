@@ -17,5 +17,5 @@ $app->get('/motoristas', function(Request $req, Response $res) {
 
     return $res;
 
-});
+})->setName('motoristas');
 

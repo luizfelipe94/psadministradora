@@ -12,4 +12,4 @@ $app->get('/', function (Request $request, Response $response) {
     ]);
     return $response;
 
-});
+})->setName('principal');

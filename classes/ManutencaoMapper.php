@@ -45,6 +45,12 @@ class ManutencaoMapper extends Mapper{
 
 	}
 
+	public function getTotalManutencoes(){
+		$sql = "SELECT count(*) AS qte FROM manutencao";
+		$count = $this->db->query($sql)->fetchColumn();
+		return $count;
+	}
+
 	public function save(){
 
 	}

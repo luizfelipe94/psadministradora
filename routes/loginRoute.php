@@ -10,7 +10,7 @@ $app->get('/login', function (Request $request, Response $response) {
 
     return $response;
 
-});
+})->setName('login');
 
 $app->post('/login', function (Request $req, Response $res) {
 
@@ -22,7 +22,7 @@ $app->post('/login', function (Request $req, Response $res) {
     $this->logger->addInfo("Usuario ".$_SESSION[UsuarioMapper::SESSION]['username']." fez login");
     return $res;
 
-});
+})->setName('login');
 
 $app->get('/logout', function (Request $request, Response $response) {
     $this->logger->addInfo("Usuario ".$_SESSION[UsuarioMapper::SESSION]['username']." fez logoff");
@@ -31,4 +31,4 @@ $app->get('/logout', function (Request $request, Response $response) {
     $response = $response->withRedirect("/login");
     return $response;
 
-});
+})->setName('logout');

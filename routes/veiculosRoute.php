@@ -16,7 +16,7 @@ $app->get('/veiculos', function (Request $request, Response $response) {
         'idUsuario' => $usuario['idUsuario']
     ]);
     return $response;
-});
+})->setName('veiculos');
 
 $app->get('/veiculo/novo', function(Request $req, Response $res) {
     $usuario = $_SESSION[UsuarioMapper::SESSION];
@@ -25,7 +25,7 @@ $app->get('/veiculo/novo', function(Request $req, Response $res) {
         'idUsuario' => $usuario['idUsuario']
     ]);
     return $res;
-});
+})->setName('veiculos-novo');
 
 $app->post('/veiculo/novo', function (Request $req, Response $res) {
     $data = $req->getParsedBody();
@@ -43,7 +43,7 @@ $app->post('/veiculo/novo', function (Request $req, Response $res) {
 
     $res = $res->withRedirect("/veiculos");
     return $res;
-});
+})->setName('veiculos-novo');
 
 $app->get('/veiculo/{id}', function (Request $req, Response $res, $args) {
     $usuario = $_SESSION[UsuarioMapper::SESSION];
@@ -58,7 +58,7 @@ $app->get('/veiculo/{id}', function (Request $req, Response $res, $args) {
         
     ]);
     return $res;
-});
+})->setName('veiculos-id');
 
 $app->post('/veiculo/{id}', function (Request $req, Response $res, $args){
     $data = $req->getParsedBody();
@@ -76,7 +76,7 @@ $app->post('/veiculo/{id}', function (Request $req, Response $res, $args){
 
     $res = $res->withRedirect("/veiculos");
     return $res;
-});
+})->setName('veiculos-id');
 
 $app->get('/veiculo-detalhes/{id}', function (Request $request, Response $response, $args) {
     $usuario = $_SESSION[UsuarioMapper::SESSION];
@@ -95,11 +95,11 @@ $app->get('/veiculo-detalhes/{id}', function (Request $request, Response $respon
     ]);
     return $response;
 
-});
+})->setName('veiculos-detalhes-id');
 
 $app->get('/veiculo/{id}/deletar', function (Request $req, Response $res, $args) {
     $mapper = new VeiculoMapper($this->db);
     $mapper->delete((int)$args['id']);
     $res = $res->withRedirect("/veiculos");
     return $res;
-});
+})->setName('veiculos-id-deletar');

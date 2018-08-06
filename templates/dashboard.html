@@ -3,10 +3,47 @@
 {% block content %}
     {{precisaPerfil}}
     {{userpass}}
-    <div class="col-sm-10">
-        <div class="box box-primary">
-                box header, widgets
-            </div>
+    <div class="row">
+
+        <div class="col-sm-4">
+                <div class="small-box bg-aqua">
+                        <div class="inner">
+                          <h3>{{ totalVeiculos }}</h3>
+            
+                          <p>Total de Veículos</p>
+                        </div>
+                        <div class="icon">
+                          <i class="ion ion-bag"></i>
+                        </div>
+                        <a href="/veiculos" class="small-box-footer">Mais informações <i class="fa fa-arrow-circle-right"></i></a>
+                      </div>
         </div>
+        <div class="col-sm-4">
+                <div class="small-box bg-aqua">
+                        <div class="inner">
+                          <h3>{{ totalManutencoes }}</h3>
+            
+                          <p>Total de Manutenções</p>
+                        </div>
+                        <div class="icon">
+                          <i class="ion ion-bag"></i>
+                        </div>
+                        <a href="/manutencoes" class="small-box-footer">Mais informações <i class="fa fa-arrow-circle-right"></i></a>
+                      </div>
+        </div>
+        <div class="col-sm-4">
+                <div class="small-box bg-aqua">
+                        <div class="inner">
+                          <h3>{{ totalUsuarios }}</h3>
+            
+                          <p>Total de Usuários</p>
+                        </div>
+                        <div class="icon">
+                          <i class="ion ion-bag"></i>
+                        </div>
+                        <a href="/usuarios" class="small-box-footer">Mais informações <i class="fa fa-arrow-circle-right"></i></a>
+                      </div>
+        </div>
+        
     </div>
 {% endblock %}

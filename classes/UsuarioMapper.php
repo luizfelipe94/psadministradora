@@ -175,6 +175,10 @@ class UsuarioMapper extends Mapper{
 		}
 	}
 
-
+	public function getTotalUsuarios(){
+		$sql = "SELECT count(*) AS qte FROM usuario";
+		$count = $this->db->query($sql)->fetchColumn();
+		return $count;
+	}
 
 }

@@ -77,4 +77,10 @@ class VeiculoMapper extends Mapper{
 		$stmt->execute();
 	}
 
+	public function getTotalVeiculos(){
+		$sql = "SELECT count(*) AS qte FROM veiculo";
+		$count = $this->db->query($sql)->fetchColumn();
+		return $count;
+	}
+
 }

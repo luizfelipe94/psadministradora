@@ -1,5 +1,4 @@
 <?php
-session_start();
 
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
@@ -7,7 +6,10 @@ use \Psr\Http\Message\ResponseInterface as Response;
 
 require __DIR__ . '/vendor/autoload.php';
 
+session_start();
+
 $config['displayErrorDetails'] = true;
+$config['determineRouteBeforeAppMiddleware'] = true;
 $config['db']['host']   = "localhost";
 $config['db']['user']   = "root";
 $config['db']['pass']   = "";
@@ -44,26 +46,39 @@ $container['db'] = function ($c) {
     $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
     return $pdo;
 };
-/*
-$app->add(new \Tuupola\Middleware\HttpBasicAuthentication([
-    "path" => "/",
-    "realm" => "Protected",
-    "ignore" => ["/login"],
-    "authenticator" => new PdoAuthenticator([
-        "pdo" => $container['db'],
-        "table" => "usuario",
-        "user" => "username",
-        "hash" => "userpass"
-    ]),
-    "error" => function ($response, $arguments) {
-        $data = [];
-        $data["status"] = "error";
-        $data["message"] = $arguments["message"];
-        return $response->write(json_encode($data, JSON_UNESCAPED_SLASHES));
+
+// Apply the middleware to every request.
+$app->add(function (Request $request, Response $response, $next) {
+    $route = $request->getAttribute('route');
+    $routeName = $route->getName();
+    $groups = $route->getGroups();
+    $methods = $route->getMethods();
+    $arguments = $route->getArguments();
+
+    # Define routes that user does not have to be logged in with. All other routes, the user
+    # needs to be logged in with.
+    $publicRoutesArray = array(
+        'login',
+        'post-login',
+        'register',
+        'forgot-password',
+        'register-post'
+    );
+
+    if (!isset($_SESSION[UsuarioMapper::SESSION]) && !in_array($routeName, $publicRoutesArray))
+    {
+        // redirect the user to the login page and do not proceed.
+        $response = $response->withRedirect('/login');
     }
-]));
-*/
-    
+    else
+    {
+        // Proceed as normal...
+        $response = $next($request, $response);
+    }
+
+    return $response;
+});
+
 //---------------ROTAS----------------------
 
 require __DIR__ . '../routes/principalRoute.php';
@@ -78,22 +93,6 @@ require __DIR__ . '../routes/motoristasRoute.php';
 
 require __DIR__ . '../routes/usuariosRoute.php';
 
-require __DIR__ . '../routes/proprietariosRoute.php';
-
 require __DIR__ . '../routes/manutencaoRoute.php';
-
-
-
-/*
-$app->get('/ticket/{id}', function (Request $request, Response $response, $args) {
-    $ticket_id = (int)$args['id'];
-    $mapper = new TicketMapper($this->db);
-    $ticket = $mapper->getTicketById($ticket_id);
-
-    $response = $this->view->render($response, "ticketdetail.phtml", ["ticket" => $ticket]);
-    return $response;
-})->setName('ticket-detail');
-*/
-
 
 $app->run();

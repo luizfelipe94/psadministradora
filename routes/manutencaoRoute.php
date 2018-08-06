@@ -15,4 +15,4 @@ $app->get('/manutencoes', function (Request $request, Response $response) {
     ]);
     return $response;
 
-});
+})->setName('manutencoes');
