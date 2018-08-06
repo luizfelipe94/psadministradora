@@ -3,9 +3,12 @@
 class ManutencaoEntity{
     protected $idManutencao;
     protected $dataManutencao;
-    protected $nome;
+    protected $estabelecimento;
     protected $detalhes;
     protected $id_Veiculo;
+    protected $tipoServico;
+    protected $descricao;
+    protected $status;
    
     
     public function __construct(array $data) {
@@ -14,9 +17,12 @@ class ManutencaoEntity{
             $this->idManutencao = $data['idManutencao'];
         }        
         $this->dataManutencao = $data['dataManutencao'];
-        $this->nome = $data['nome'];
+        $this->estabelecimento = $data['estabelecimento'];
         $this->detalhes = $data['detalhes'];
         $this->id_Veiculo = $data['id_Veiculo'];
+        $this->tipoServico = $data['tipoServico'];
+        $this->descricao = $data['descricao'];
+        $this->status = $data['status'];
     }
 
     public function getIdManutencao(){
@@ -27,8 +33,8 @@ class ManutencaoEntity{
         return $this->dataManutencao;
     }
 
-    public function getNome(){
-        return $this->nome;
+    public function getEstabelecimento(){
+        return $this->estabelecimento;
     }
 
     public function getDetalhes(){
@@ -37,5 +43,17 @@ class ManutencaoEntity{
 
     public function getIdVeiculo(){
         return $this->id_Veiculo;
+    }
+
+    public function getTipoServico(){
+        return $this->tipoServico;
+    }
+
+    public function getDescricao(){
+        return $this->descricao;
+    }
+
+    public function getStatus(){
+        return $this->status;
     }
 }
