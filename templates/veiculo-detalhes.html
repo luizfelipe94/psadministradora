@@ -53,21 +53,26 @@
                         <tr>
                             <th>ID</th>
                             <th>DATA</th>
-                            <th>NOME</th>
+                            <th>ESTABELECIMENTO</th>
+                            <th>SERVICO</th>
+                            <th>DESCRICAO</th>
                             <th>DETALHES</th>
-                            <th>AÇÕES</th>
+                            <th>STATUS</th>
                         </tr>
         
                         {% for manutencao in manutencoes %}
                             <tr>
                                 <td>{{ manutencao.idManutencao }}</td>
-                                <td>{{ manutencao.dataManutencao }}</td>
-                                <td>{{ manutencao.nome }}</td>
-                                <td>{{ manutencao.detalhes }}</td>
-                                <td>
-                                    <a href="/manutencao/{{ manutencao.idManutencao }}"><span class="glyphicon glyphicon-pencil"></span> </a>
-                                    <a href="/manutencao/{{ manutencao.idManutencao }}/deletar" onclick="return confirm('Deseja realmente excluir este registro?')"><span class="glyphicon glyphicon-remove-sign"></span> </a>
-                                </td>
+                        <td>{{ manutencao.dataManutencao }}</td>
+                        <td>{{ manutencao.estabelecimento }}</td>
+                        <td>{{ manutencao.tipoServico }}</td>
+                        <td>{{ manutencao.descricao }}</td>
+                        <td>{{ manutencao.detalhes }}</td>
+                        <td>{{ manutencao.status }}</td>
+                        <td>
+                            <a href="/manutencao/{{ manutencao.idManutencao }}"><span class="glyphicon glyphicon-pencil"></span> </a>
+                            <a href="/manutencao/{{ manutencao.idManutencao }}/deletar" onclick="return confirm('Deseja realmente excluir este registro?')"><span class="glyphicon glyphicon-remove-sign"></span> </a>
+                        </td>
                             </tr>
                         {% endfor %}
                     </table>
