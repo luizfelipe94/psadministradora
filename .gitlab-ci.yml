@@ -28,7 +28,7 @@ services:
 variables:
   # Configure mysql environment variables (https://hub.docker.com/r/_/mysql/)
   MYSQL_DATABASE: uberdatamanager
-  MYSQL_ROOT_PASSWORD:
+  MYSQL_ROOT_PASSWORD: root
 
 # Run our tests
 # If Xdebug was installed you can generate a coverage report and see code coverage metrics.
