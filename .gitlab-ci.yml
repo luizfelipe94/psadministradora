@@ -8,7 +8,3 @@ before_script:
 
 # Set any variables we need
 variables:
-
-# Run our tests
-# If Xdebug was installed you can generate a coverage report and see code coverage metrics.
-test:
