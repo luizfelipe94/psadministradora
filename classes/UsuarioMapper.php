@@ -115,7 +115,6 @@ class UsuarioMapper extends Mapper{
         }else{
 			throw new \Exception("Usuário inexistente ou senha inválida.");
 		}
-
 	}
 	
 	public function logout(){
@@ -131,48 +130,6 @@ class UsuarioMapper extends Mapper{
 		$stmt = $this->db->prepare($sql);
 		$stmt->bindParam(":id", $id);
 		$data = $stmt->execute();
-	}
-
-	public function checkLogin($tipo = "admin"):bool
-	{
-		if (
-			!isset($_SESSION[UsuarioMapper::SESSION])
-			||
-			!$_SESSION[UsuarioMapper::SESSION]
-			||
-			!(int)$_SESSION[UsuarioMapper::SESSION]["idUsuario"] > 0
-		) {
-			//Não está logado
-			return false;
-		} else {
-			if ($tipo === "admin" && (bool)$_SESSION[UsuarioMapper::SESSION]['tipo'] === "admin") {
-				return true;
-			} else if ($tipo !== "admin") {
-				return true;
-			} else {
-				return false;
-			}
-		}
-	}
-
-	public function verifyLogin($request, $response, $tipo = "admin")
-	{
-		if (!UsuarioMapper::checkLogin($tipo)) {
-
-			if ($tipo === "admin") {
-			
-				$response = $response->withRedirect('/dashboard');
-				return $response;
-
-			} else {
-				
-				$response = $response->withRedirect('/login');
-				return $response;
-				
-			}
-			
-			exit;
-		}
 	}
 
 	public function getTotalUsuarios(){
