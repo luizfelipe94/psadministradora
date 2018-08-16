@@ -13,11 +13,19 @@
                 <div class="form-group">
                     <label for="modelo">USERNAME</label>
                     <input class="form-control" name="username" id="username" type="text" />
+                    {% if has_error('username') %}<span>{{ error('username') }}</span>{% endif %}
                 </div>
 
                 <div class="form-group">
                     <label for="ano">PASSWORD</label>
                     <input class="form-control" name="userpass" id="userpass" type="password" />
+                    {% if has_error('userpass') %}<span>{{ error('userpass') }}</span>{% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label for="ano">CONFIRMAR PASSWORD</label>
+                    <input class="form-control" name="confirme_userpass" id="userpass" type="password" />
+                    {% if has_error('confirme_userpass') %}<span>{{ error('confirme_userpass') }}</span>{% endif %}
                 </div>
 
                 <div class="form-group">

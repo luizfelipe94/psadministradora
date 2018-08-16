@@ -29,6 +29,33 @@ $app->get('/usuario/novo', function(Request $req, Response $res) {
 
 $app->post('/usuario/novo', function(Request $req, Response $res) {
 
+    $this->validator->validate($request, [
+        'username' => V::length(6, 25)->alnum('_')->noWhitespace(),
+        'userpass' => V::length(6, 25),
+        'confirme_userpass' => V::equals($request->getParam('userpass'))
+    ]);
+
+    if ($this->validator->isValid()) {
+            
+        $data = $req->getParsedBody();
+        $usuarioData = [];
+        $usuarioData['username'] = filter_var($data['username'], FILTER_SANITIZE_STRING);
+        $usuarioData['userpass'] = filter_var($data['userpass'], FILTER_SANITIZE_STRING);
+        $usuarioData['tipo'] = filter_var($data['tipo'], FILTER_SANITIZE_STRING);
+
+        $usuario = new UsuarioEntity($usuarioData);
+        $usuarioMapper = new UsuarioMapper($this->db);
+        $usuarioMapper->save($usuario);
+
+        return $res->withRedirect("/usuarios");
+    }
+
+    return $this->viewtwig->render($res, "usuarioadd.html",[
+        'username' => $usuario['username'],
+        'idUsuario' => $usuario['idUsuario']
+    ]);
+
+/*
     $data = $req->getParsedBody();
     $usuarioData = [];
     $usuarioData['username'] = filter_var($data['username'], FILTER_SANITIZE_STRING);
@@ -41,6 +68,8 @@ $app->post('/usuario/novo', function(Request $req, Response $res) {
 
     $res = $res->withRedirect("/usuarios");
     return $res;
+
+*/
 })->setName('usuarios-novo');
 
 $app->get('/usuario/{id}', function (Request $req, Response $res, $args) {
