@@ -5,6 +5,3 @@ image: php:7.1.1
 before_script:
 - php composer.phar update
 
-
-# Set any variables we need
-variables:
