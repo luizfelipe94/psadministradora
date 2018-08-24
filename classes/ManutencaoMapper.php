@@ -63,5 +63,45 @@ class ManutencaoMapper extends Mapper{
 		
 	}
 
+
+	public function getManutencoesConcluidas(){
+		$sql = "select * from manutencao WHERE status = 'OK' ORDER BY idManutencao limit 10";
+		
+		$stmt = $this->db->query($sql);
+		$results = [];
+
+		while($row = $stmt->fetch()){
+			$results[] = new ManutencaoEntity($row);
+		}
+
+		return $results;
+	}
+
+	public function getManutencoesPendentes(){
+		$sql = "select * from manutencao WHERE status = 'PE' ORDER BY idManutencao limit 10";
+		
+		$stmt = $this->db->query($sql);
+		$results = [];
+
+		while($row = $stmt->fetch()){
+			$results[] = new ManutencaoEntity($row);
+		}
+
+		return $results;
+	}
+
+	public function getManutencoesCanceladas(){
+		$sql = "select * from manutencao WHERE status = 'CA' ORDER BY idManutencao limit 10";
+		
+		$stmt = $this->db->query($sql);
+		$results = [];
+
+		while($row = $stmt->fetch()){
+			$results[] = new ManutencaoEntity($row);
+		}
+
+		return $results;
+	}
+
 	
 }

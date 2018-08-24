@@ -5,7 +5,7 @@ This package comes with a Twig extension to display error messages and submitted
 
 To use the extension, you must install twig first
 
-
+*/
 $ composer require slim/twig-view
 Configuration
 $container['view'] = function ($container) {

@@ -8,14 +8,15 @@ $app->get('/dashboard', function (Request $request, Response $response) {
     $mapper = new UsuarioMapper($this->db);
     $mapperManutencao = new ManutencaoMapper($this->db);
 
-    $idUsuario = (int)$_SESSION[UsuarioMapper::SESSION]['id_Perfil'];
-
-    $precisaPerfil = $mapper->getIdUsuario($idUsuario);
+    $idUsuario = (int)$_SESSION[UsuarioMapper::SESSION]['idUsuario'];
 
     $veiculoMapper = new VeiculoMapper($this->db);
     $totalVeiculos = $veiculoMapper->getTotalVeiculos();
     $totalUsuarios = $mapper->getTotalUsuarios();
     $totalManutencoes = $mapperManutencao->getTotalManutencoes();
+    $totalManutencoesConcluidas = $mapperManutencao->getManutencoesConcluidas();
+    $totalManutencoesPendentes = $mapperManutencao->getManutencoesPendentes();
+    $totalManutencoesCanceladas = $mapperManutencao->getManutencoesCanceladas();
 
     $response = $this->viewtwig->render($response, "dashboard.html",[
         'username' => $_SESSION[UsuarioMapper::SESSION]['username'],
@@ -23,7 +24,10 @@ $app->get('/dashboard', function (Request $request, Response $response) {
         'precisaPerfil' => $precisaPerfil,
         'totalVeiculos' => $totalVeiculos,
         'totalUsuarios' => $totalUsuarios,
-        'totalManutencoes' => $totalManutencoes
+        'totalManutencoes' => $totalManutencoes,
+        'totalManutencoesConcluidas' => $totalManutencoesConcluidas,
+        'totalManutencoesPendentes' => $totalManutencoesPendentes,
+        'totalManutencoesCanceladas' => $totalManutencoesCanceladas        
     ]);
     return $response;
 
