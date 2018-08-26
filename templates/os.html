@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+{% block content %}
+
+
+<div class="col-sm-12">
+        <div class="box">
+        <div class="box-header">
+            <h3 class="box-title">Ordens de Serviço</h3>
+        </div>
+        <table class="table table-bordered table-striped dataTable">
+            <tr>
+                <th>ID</th>
+                <th>STATUS</th>
+                <th>DATA INICIAL</th>
+                <th>DATA FINAL</th>
+                <th>VALOR TOTAL</th>
+                <th>RESPONSÁVEL</th>
+                <th>AÇÕES</th>
+            </tr>
+
+            {% for os in oss %}
+                <tr>
+                    <td>{{ os.idOs }}</td>
+                    <td>{{ os.status }}</td>
+                    <td>{{ os.dataInicial }}</td>
+                    <td>{{ os.dataFinal }}</td>
+                    <td>{{ os.valorTotal }}</td>
+                    <td>{{ os.responsavel }}</td>
+                    <td>visualizar</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+
+
+
+{% endblock %}

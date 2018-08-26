@@ -1,12 +1,12 @@
-INFORMAÇÕES
-- data inicial
-- data final
+O administrador vai adicionar uma ou mais manutenções no sistema e no final irá conferir se está tudo certo. Depois disso será
+gerado uma OS com todas as informações para serem executados os serviço. Como dados do veículo, responsável, oficina.
+a OS será dividida em tres partes, a de cima será informações do veiculo e proprietario, a segunda será as tarefas a serem
+executadas, e a terceira será os valores e formas de pagamento.
 
 
 
-MANUTENÇÕES
-- 
+tela OS's
 
-
-FINANCEIRO
-- 
+botão adicionar OS
+tabela
+id | cliente | data inicial | data final | status | ações

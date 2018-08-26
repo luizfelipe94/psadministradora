@@ -10,10 +10,10 @@ session_start();
 
 $config['displayErrorDetails'] = true;
 $config['determineRouteBeforeAppMiddleware'] = true;
-$config['db']['host']   = "us-cdbr-iron-east-01.cleardb.net";
-$config['db']['user']   = "b413c6a58a4f35";
-$config['db']['pass']   = "cd836491";
-$config['db']['dbname'] = "heroku_c735833c9f288fc";
+$config['db']['host']   = "localhost";
+$config['db']['user']   = "root";
+$config['db']['pass']   = "";
+$config['db']['dbname'] = "uberdatamanager";
 
 
 $app = new \Slim\App(["settings" => $config]);
@@ -94,5 +94,7 @@ require __DIR__ . '../routes/motoristasRoute.php';
 require __DIR__ . '../routes/usuariosRoute.php';
 
 require __DIR__ . '../routes/manutencaoRoute.php';
+
+require __DIR__ . '../routes/osRoute.php';
 
 $app->run();
