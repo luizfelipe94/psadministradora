@@ -18,3 +18,22 @@ $app->get('/manutencoes', function (Request $request, Response $response) {
     return $response;
 
 })->setName('manutencoes');
+
+$app->get('/agendar-manutencao/{id}', function (Request $request, Response $response, $args){
+
+    $usuario = $_SESSION[UsuarioMapper::SESSION];
+    $manutencaoMapper = new ManutencaoMapper($this->db);
+    $veiculoMapper = new VeiculoMapper($this->db);
+
+    $veiculo = $veiculoMapper->getVeiculoById((int)$args['id']);
+
+
+    $response = $this->viewtwig->render($response, "agendar-manutencao.html",[
+        'username' => $usuario['username'],
+        'idUsuario' => $usuario['idUsuario'],
+        'veiculo' => $veiculo
+    ]);
+
+    return $response;
+
+})->setName('agendar-manutencao-id');

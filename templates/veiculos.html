@@ -20,6 +20,7 @@
                     <th>PLACA</th>
                     <th>KM</th>
                     <th>AÇÕES</th>
+                    <th>MANUTENÇÃO</th>
                 </tr>
 
                 {% for veiculo in veiculos %}
@@ -35,6 +36,7 @@
                             <a href="/veiculo/{{ veiculo.idVeiculo }}/deletar" onclick="return confirm('Deseja realmente excluir este registro?')"><span class="glyphicon glyphicon-remove-sign"></span> </a>
                             <a href="/veiculo-detalhes/{{ veiculo.idVeiculo }}"><span class="glyphicon glyphicon-info-sign"></span></a>
                         </td>
+                        <td><a href="/agendar-manutencao/{{ veiculo.idVeiculo }}"><button type="button" class="btn btn-block btn-primary btn-sm">Agendar</button></a></td>
                     </tr>
                 {% endfor %}
             </table>
