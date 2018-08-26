@@ -21,7 +21,6 @@ $app->get('/dashboard', function (Request $request, Response $response) {
     $response = $this->viewtwig->render($response, "dashboard.html",[
         'username' => $_SESSION[UsuarioMapper::SESSION]['username'],
         'idUsuario' => $_SESSION[UsuarioMapper::SESSION]['idUsuario'],
-        'precisaPerfil' => $precisaPerfil,
         'totalVeiculos' => $totalVeiculos,
         'totalUsuarios' => $totalUsuarios,
         'totalManutencoes' => $totalManutencoes,

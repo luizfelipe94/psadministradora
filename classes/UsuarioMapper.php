@@ -85,7 +85,7 @@ class UsuarioMapper extends Mapper{
 		]);
     }
     
-    public function login($username, $userpass){
+    public function login($username, $userpass):bool{
 
 		//$sql = "SELECT * FROM usuario a INNER JOIN perfil b ON a.id_Perfil = b.idPerfil WHERE a.username = :username";
 		
@@ -98,7 +98,8 @@ class UsuarioMapper extends Mapper{
 
 		if (count($results) === 0)
 		{
-			throw new \Exception("Usuário inexistente ou senha inválida. (nao retornou resultado)");
+			//throw new \Exception("Usuário inexistente ou senha inválida. (nao retornou resultado)");
+			return false;
         }
         
         $data = $results[0];
@@ -111,10 +112,13 @@ class UsuarioMapper extends Mapper{
 			$_SESSION[UsuarioMapper::SESSION]['username'] = $usuario->getUsername();
 			$_SESSION[UsuarioMapper::SESSION]['tipo'] = $usuario->getTipo();
 			$_SESSION[UsuarioMapper::SESSION]['id_Perfil'] = $usuario->getId_Perfil();
+			return true;
 
         }else{
-			throw new \Exception("Usuário inexistente ou senha inválida.");
+			//throw new \Exception("Usuário inexistente ou senha inválida.");
+			return false;
 		}
+		return false;
 	}
 	
 	public function logout(){

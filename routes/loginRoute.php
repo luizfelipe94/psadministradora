@@ -3,10 +3,15 @@
 use Slim\Http\Request;
 use Slim\Http\Response;
 use \classes\Mapper;
+//use \classes\ErrorHandler; pq nao funciona com o autoload do composer???
+
+require 'classes/ErrorHandler.php';
 
 $app->get('/login', function (Request $request, Response $response) {
 
-    $response = $this->viewtwig->render($response, "login.html",[]);
+    $response = $this->viewtwig->render($response, "login.html",[
+        "errorLogin" => ErrorHandler::getError()
+    ]);
 
     return $response;
 
@@ -17,9 +22,18 @@ $app->post('/login', function (Request $req, Response $res) {
     $mapper = new UsuarioMapper($this->db);
     $data = [];
     $data = $req->getParsedBody();
-    $mapper->login($data['username'], $data['userpass']);
-    $res = $res->withRedirect("/dashboard");
-    $this->logger->addInfo("Usuario ".$_SESSION[UsuarioMapper::SESSION]['username']." fez login");
+    $logado = $mapper->login($data['username'], $data['userpass']);
+   
+
+    if($logado){
+        $res = $res->withRedirect("/dashboard");
+    }else{
+        $res = $res->withRedirect("/login");
+        ErrorHandler::setError("Usuário ou senha inválidos.");
+    }
+    if(isset($_SESSION[UsuarioMapper::SESSION]))
+        $this->logger->addInfo("Usuario ".$_SESSION[UsuarioMapper::SESSION]['username']." fez login");
+
     return $res;
 
 })->setName('login');
