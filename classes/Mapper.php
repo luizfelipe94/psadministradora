@@ -1,5 +1,7 @@
 <?php
 
+namespace app\classes;
+
 abstract class Mapper {
     protected $db;
 

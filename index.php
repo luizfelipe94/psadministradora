@@ -6,6 +6,8 @@ use \Psr\Http\Message\ResponseInterface as Response;
 
 require __DIR__ . '/vendor/autoload.php';
 
+use app\classes\UsuarioMapper;
+
 session_start();
 
 $config['displayErrorDetails'] = true;

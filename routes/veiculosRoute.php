@@ -2,6 +2,9 @@
 
 use Slim\Http\Request;
 use Slim\Http\Response;
+use app\classes\VeiculoMapper;
+use app\classes\UsuarioMapper;
+use app\classes\ManutencaoMapper;
 
 $app->get('/veiculos', function (Request $request, Response $response) {
     

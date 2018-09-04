@@ -1,5 +1,7 @@
 <?php
 
+namespace app\classes;
+
 class PerfilMapper extends Mapper{
 
     public function verificaPerfilExiste($idPerfil){

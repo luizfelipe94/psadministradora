@@ -1,5 +1,7 @@
 <?php
 
+namespace app\classes;
+
 class UsuarioMapper extends Mapper{
 
 	const SESSION = "Usuario";

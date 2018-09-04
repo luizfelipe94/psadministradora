@@ -1,5 +1,7 @@
 <?php
 
+namespace app\classes;
+
 class ManutencaoMapper extends Mapper{
 
     public function getManutencoes(){

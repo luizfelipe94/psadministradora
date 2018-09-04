@@ -1,5 +1,7 @@
 <?php
 
+namespace app\classes;
+
 class ErrorHandler{
 
     const ERROR = "Error";

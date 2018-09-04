@@ -1,5 +1,7 @@
 <?php
 
+namespace app\classes;
+
 class UsuarioEntity{
 
     protected $idUsuario;

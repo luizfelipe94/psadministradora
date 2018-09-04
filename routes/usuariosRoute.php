@@ -2,6 +2,7 @@
 
 use Slim\Http\Request;
 use Slim\Http\Response;
+use app\classes\UsuarioMapper;
 
 
 $app->get('/usuarios', function(Request $req, Response $res) {

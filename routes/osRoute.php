@@ -2,6 +2,8 @@
 
 use Slim\Http\Request;
 use Slim\Http\Response;
+use app\classes\OsMapper;
+use app\classes\UsuarioMapper;
 
 $app->get('/os', function (Request $request, Response $response) {
 

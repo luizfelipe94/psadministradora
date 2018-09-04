@@ -1,5 +1,7 @@
 <?php
 
+namespace app\classes;
+
 class OsMapper extends Mapper{
 
     public function listAllOs(){

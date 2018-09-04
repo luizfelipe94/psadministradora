@@ -1,5 +1,7 @@
 <?php
 
+namespace app\classes;
+
 class VeiculoMapper extends Mapper{
 
 	public function getVeiculos(){
