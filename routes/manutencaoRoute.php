@@ -18,9 +18,11 @@ $app->get('/manutencoes', function (Request $request, Response $response) {
         'username' => $usuario['username'],
         'idUsuario' => $usuario['idUsuario']
     ]);
+    
     return $response;
 
 })->setName('manutencoes');
+
 
 $app->get('/agendar-manutencao/{id}', function (Request $request, Response $response, $args){
 
@@ -40,3 +42,18 @@ $app->get('/agendar-manutencao/{id}', function (Request $request, Response $resp
     return $response;
 
 })->setName('agendar-manutencao-id');
+
+
+$app->get('/manutencao/{id}/concluir', function (Request $request, Response $response, $args){
+
+    $usuario = $_SESSION[UsuarioMapper::SESSION];
+    
+    $response = $this->viewtwig->render($response, "concluir-manutencao.html",[
+        'username' => $usuario['username'],
+        'idUsuario' => $usuario['idUsuario']
+    ]);
+
+    return $response;
+
+})->setName('concluir-manutencao-id');
+
