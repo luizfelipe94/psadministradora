@@ -3,7 +3,7 @@
 use Slim\Http\Request;
 use Slim\Http\Response;
 use app\classes\UsuarioMapper;
-use app\classes\ManutencaoMapper;
+use app\classes\Notificacao;
 
 $app->get('/notificacoes', function (Request $request, Response $response) {
 
@@ -16,9 +16,11 @@ $app->get('/notificacoes', function (Request $request, Response $response) {
 
 })->setName('notificacoes');
 
-$app->get('/notificacoes-pendentes', function (Request $request, Response $response) {
+$app->post('/notificacoes-pendentes', function (Request $request, Response $response) {
 
-    $mapper = new ManutencaoMapper;
+    $notificacao = new Notificacao;
+
+    $notificacao->sendManutencaoPendente('luizlipefs@hotmail.com');
 
     $response = $response->withRedirect("/notificacoes");
 

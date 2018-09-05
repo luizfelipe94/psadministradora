@@ -3,6 +3,7 @@
 use Slim\Http\Request;
 use Slim\Http\Response;
 use app\classes\UsuarioMapper;
+use app\classes\UsuarioEntity;
 
 
 $app->get('/usuarios', function(Request $req, Response $res) {
@@ -20,17 +21,21 @@ $app->get('/usuarios', function(Request $req, Response $res) {
 })->setName('usuarios');
 
 $app->get('/usuario/novo', function(Request $req, Response $res) {
+
     $usuario = $_SESSION[UsuarioMapper::SESSION];
+
     $res = $this->viewtwig->render($res, "usuarioadd.html",[
         'username' => $usuario['username'],
         'idUsuario' => $usuario['idUsuario']
     ]);
+
     return $res;
+    
 })->setName('usuarios-novo');
 
 $app->post('/usuario/novo', function(Request $req, Response $res) {
 
-    $this->validator->validate($request, [
+    /*$this->validator->validate($request, [
         'username' => V::length(6, 25)->alnum('_')->noWhitespace(),
         'userpass' => V::length(6, 25),
         'confirme_userpass' => V::equals($request->getParam('userpass'))
@@ -55,8 +60,7 @@ $app->post('/usuario/novo', function(Request $req, Response $res) {
         'username' => $usuario['username'],
         'idUsuario' => $usuario['idUsuario']
     ]);
-
-/*
+*/
     $data = $req->getParsedBody();
     $usuarioData = [];
     $usuarioData['username'] = filter_var($data['username'], FILTER_SANITIZE_STRING);
@@ -70,7 +74,6 @@ $app->post('/usuario/novo', function(Request $req, Response $res) {
     $res = $res->withRedirect("/usuarios");
     return $res;
 
-*/
 })->setName('usuarios-novo');
 
 $app->get('/usuario/{id}', function (Request $req, Response $res, $args) {
