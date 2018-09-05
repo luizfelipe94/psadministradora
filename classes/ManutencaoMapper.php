@@ -105,5 +105,10 @@ class ManutencaoMapper extends Mapper{
 		return $results;
 	}
 
+	public function concluirManutencao($idManutencao){
+
+		//fazer um update da manutencao com o id por paramentro na tabela manutencao
+
+	}
 	
 }

@@ -99,4 +99,6 @@ require __DIR__ . '../routes/manutencaoRoute.php';
 
 require __DIR__ . '../routes/osRoute.php';
 
+require __DIR__ . '../routes/notificacaoRoute.php';
+
 $app->run();
