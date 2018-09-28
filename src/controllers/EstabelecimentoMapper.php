@@ -1,6 +1,6 @@
 <?php
 
-namespace lfsilva\src\controllers;
+namespace app\src\controllers;
 
 class EstabelecimentoMapper extends Mapper{
 

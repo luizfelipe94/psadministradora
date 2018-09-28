@@ -1,6 +1,6 @@
 <?php
 
-namespace lfsilva\src\models;
+namespace app\src\models;
 
 class VeiculoEntity
 {
