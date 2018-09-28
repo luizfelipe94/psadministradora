@@ -1,7 +1,6 @@
 <?php
 
 namespace app\src\controllers;
-use app\src\models\UsuarioEntity;
 
 class UsuarioMapper extends Mapper{
 

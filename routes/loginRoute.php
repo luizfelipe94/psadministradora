@@ -5,8 +5,11 @@ use Slim\Http\Response;
 use \classes\Mapper;
 //use \classes\ErrorHandler; pq nao funciona com o autoload do composer???
 
-use app\classes\ErrorHandler;
-use app\classes\UsuarioMapper;
+// use app\classes\ErrorHandler;
+// use app\classes\UsuarioMapper;
+use app\src\controllers\UsuarioMapper;
+use app\src\controllers\ErrorHandler;
+
 
 $app->get('/login', function (Request $request, Response $response) {
 

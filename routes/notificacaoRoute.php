@@ -2,8 +2,11 @@
 
 use Slim\Http\Request;
 use Slim\Http\Response;
-use app\classes\UsuarioMapper;
-use app\classes\Notificacao;
+// use app\classes\UsuarioMapper;
+// use app\classes\Notificacao;
+
+use app\src\controllers\UsuarioMapper;
+use app\src\controllers\Notificacao;
 
 $app->get('/notificacoes', function (Request $request, Response $response) {
 

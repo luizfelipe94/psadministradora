@@ -2,9 +2,11 @@
 
 use Slim\Http\Request;
 use Slim\Http\Response;
-use app\classes\UsuarioMapper;
-use app\classes\UsuarioEntity;
+// use app\classes\UsuarioMapper;
+// use app\classes\UsuarioEntity;
 
+use app\src\controllers\UsuarioMapper;
+use app\src\models\UsuarioEntity;
 
 $app->get('/usuarios', function(Request $req, Response $res) {
 

@@ -19,7 +19,7 @@ use \Psr\Http\Message\ResponseInterface as Response;
 require __DIR__."/vendor/autoload.php";
 
 //use app\classes\UsuarioMapper;
-use app\src\controllers\UsuarioMapper;
+use app\src\controllers\UsuarioMapper12;
 
 session_start();
 
@@ -62,37 +62,37 @@ $container['db'] = function ($c) {
     return $pdo;
 };
 
-// // Apply the middleware to every request.
-$app->add(function (Request $request, Response $response, $next) {
-    $route = $request->getAttribute('route');
-    $routeName = $route->getName();
-    $groups = $route->getGroups();
-    $methods = $route->getMethods();
-    $arguments = $route->getArguments();
+// // // Apply the middleware to every request.
+// $app->add(function (Request $request, Response $response, $next) {
+//     $route = $request->getAttribute('route');
+//     $routeName = $route->getName();
+//     $groups = $route->getGroups();
+//     $methods = $route->getMethods();
+//     $arguments = $route->getArguments();
 
-    # Define routes that user does not have to be logged in with. All other routes, the user
-    # needs to be logged in with.
-    $publicRoutesArray = array(
-        'login',
-        'post-login',
-        'register',
-        'forgot-password',
-        'register-post'
-    );
+//     # Define routes that user does not have to be logged in with. All other routes, the user
+//     # needs to be logged in with.
+//     $publicRoutesArray = array(
+//         'login',
+//         'post-login',
+//         'register',
+//         'forgot-password',
+//         'register-post'
+//     );
 
-    if (!isset($_SESSION[UsuarioMapper::SESSION]) && !in_array($routeName, $publicRoutesArray))
-    {
-        // redirect the user to the login page and do not proceed.
-        $response = $response->withRedirect('/login');
-    }
-    else
-    {
-        // Proceed as normal...
-        $response = $next($request, $response);
-    }
+//     if (!isset($_SESSION[UsuarioMapper::SESSION]) && !in_array($routeName, $publicRoutesArray))
+//     {
+//         // redirect the user to the login page and do not proceed.
+//         $response = $response->withRedirect('/login');
+//     }
+//     else
+//     {
+//         // Proceed as normal...
+//         $response = $next($request, $response);
+//     }
 
-    return $response;
-});
+//     return $response;
+// });
 
 
 //---------------ROTAS----------------------
@@ -115,6 +115,6 @@ require __DIR__ . '../routes/osRoute.php';
 
 require __DIR__ . '../routes/notificacaoRoute.php';
 
-//require __DIR__ . '../routes/estabelecimentosRoute.php';
+require __DIR__ . '../routes/estabelecimentosRoute.php';
 
 $app->run();
