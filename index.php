@@ -1,12 +1,25 @@
 <?php
 
+
+if (PHP_SAPI == 'cli-server') {
+    // To help the built-in PHP dev server, check if the request was actually for
+    // something which should probably be served as a static file
+    $url  = parse_url($_SERVER['REQUEST_URI']);
+    $file = __DIR__ . $url['path'];
+    if (is_file($file)) {
+        return false;
+    }
+}
+
+
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 //use \Tuupola\Middleware\HttpBasicAuthentication\PdoAuthenticator;
 
-require __DIR__ . '/vendor/autoload.php';
+require __DIR__."/vendor/autoload.php";
 
-use app\classes\UsuarioMapper;
+//use app\classes\UsuarioMapper;
+use app\src\controllers\UsuarioMapper;
 
 session_start();
 
@@ -49,7 +62,7 @@ $container['db'] = function ($c) {
     return $pdo;
 };
 
-// Apply the middleware to every request.
+// // Apply the middleware to every request.
 $app->add(function (Request $request, Response $response, $next) {
     $route = $request->getAttribute('route');
     $routeName = $route->getName();
@@ -81,6 +94,7 @@ $app->add(function (Request $request, Response $response, $next) {
     return $response;
 });
 
+
 //---------------ROTAS----------------------
 
 require __DIR__ . '../routes/principalRoute.php';
@@ -100,5 +114,7 @@ require __DIR__ . '../routes/manutencaoRoute.php';
 require __DIR__ . '../routes/osRoute.php';
 
 require __DIR__ . '../routes/notificacaoRoute.php';
+
+//require __DIR__ . '../routes/estabelecimentosRoute.php';
 
 $app->run();
